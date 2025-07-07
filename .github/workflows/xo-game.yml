@@ -1,0 +1,60 @@
+name: Update X-O Game
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  update-game:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.title, 'xo|')
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Parse Move
+      id: parse
+      run: |
+        TITLE="${{ github.event.issue.title }}"
+        IFS='|' read -ra PARTS <<< "$TITLE"
+        echo "action=${PARTS[1]}" >> $GITHUB_OUTPUT
+        echo "position=${PARTS[2]}" >> $GITHUB_OUTPUT
+        echo "gameId=${PARTS[3]}" >> $GITHUB_OUTPUT
+        echo "player=${{ github.event.issue.user.login }}" >> $GITHUB_OUTPUT
+        
+    - name: Update Game State
+      run: |
+        node scripts/update-game.js \
+          --action="${{ steps.parse.outputs.action }}" \
+          --position="${{ steps.parse.outputs.position }}" \
+          --player="${{ steps.parse.outputs.player }}" \
+          --gameId="${{ steps.parse.outputs.gameId }}"
+          
+    - name: Update README
+      run: |
+        node scripts/generate-readme.js
+        
+    - name: Commit Changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "🎮 Move by @${{ github.event.issue.user.login }}: ${{ steps.parse.outputs.position }}"
+        git push
+        
+    - name: Close Issue
+      uses: peter-evans/close-issue@v2
+      with:
+        issue-number: ${{ github.event.issue.number }}
+        comment: |
+          ✅ Move processed! 
+          Player: @${{ github.event.issue.user.login }}
+          Position: ${{ steps.parse.outputs.position }}
+          
+          Check the updated game board in the README!

@@ -1,0 +1,16 @@
+{
+  "board": [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""]
+  ],
+  "currentPlayer": "X",
+  "gameId": 1001,
+  "winner": null,
+  "gameOver": false,
+  "lastMove": {
+    "player": "",
+    "position": "",
+    "timestamp": ""
+  }
+}
