@@ -1,7 +1,7 @@
 {
   "board": [
     [
-      "",
+      "O",
       "",
       ""
     ],
@@ -16,8 +16,8 @@
       ""
     ]
   ],
-  "currentPlayer": "O",
+  "currentPlayer": "X",
   "gameStatus": "ongoing",
   "winner": null,
-  "moveCount": 1
+  "moveCount": 2
 }

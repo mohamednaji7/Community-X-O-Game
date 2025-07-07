@@ -2,15 +2,15 @@
 
 **Game is in progress!** This is open to ANYONE to play the next move. That's the point! 🎮
 
-**O's turn!** Click on an empty cell to make your move.
+**X's turn!** Click on an empty cell to make your move.
 
 ## Game Board
 
 |   | A | B | C |
 |---|---|---|---|
-| 1 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C0%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C1%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C2%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) |
-| 2 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C0%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C1%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C2%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) |
-| 3 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C0%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | ❌ | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C2%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) |
+| 1 | ⭕ | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C1%7CX&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C2%7CX&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) |
+| 2 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C0%7CX&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C1%7CX&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C2%7CX&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) |
+| 3 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C0%7CX&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | ❌ | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C2%7CX&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) |
 
 ## How to Play
 
@@ -26,8 +26,8 @@
 
 ## Game Statistics
 
-- **Moves played**: 1
-- **Current player**: O
+- **Moves played**: 2
+- **Current player**: X
 - **Status**: In progress
 
 ---
