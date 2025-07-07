@@ -1,11 +1,23 @@
 {
   "board": [
-    ["", "", ""],
-    ["", "", ""],
-    ["", "", ""]
+    [
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "X",
+      ""
+    ]
   ],
-  "currentPlayer": "X",
+  "currentPlayer": "O",
   "gameStatus": "ongoing",
   "winner": null,
-  "moveCount": 0
+  "moveCount": 1
 }

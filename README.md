@@ -1,16 +1,16 @@
 # Community X-O Game
 
-**New Game Started!** This is open to ANYONE to play the next move. That's the point! 🎮
+**Game is in progress!** This is open to ANYONE to play the next move. That's the point! 🎮
 
-**X's turn!** Click on an empty cell to make your move.
+**O's turn!** Click on an empty cell to make your move.
 
 ## Game Board
 
 |   | A | B | C |
 |---|---|---|---|
-| 1 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C0%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C1%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C2%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) |
-| 2 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C0%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C1%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C2%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) |
-| 3 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C0%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C1%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C2%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) |
+| 1 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C0%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C1%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C2%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) |
+| 2 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C0%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C1%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C2%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) |
+| 3 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C0%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) | ❌ | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C2%7CO&body=Just%20push%20'Submit%20new%20issue'.%20You%20don't%20need%20to%20do%20anything%20else.) |
 
 ## How to Play
 
@@ -20,18 +20,14 @@
 4. Players alternate between X and O
 5. First to get 3 in a row (horizontal, vertical, or diagonal) wins!
 
-## Start New Game
-
-Want to play again? [Click here to start a new game](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cnew-game&body=Just+push+%27Submit+new+issue%27+to+start+a+new+game.)
-
 ## Share with Friends
 
 [Share on Twitter](https://twitter.com/share?text=I'm+playing+X-O+on+a+GitHub+repository!+Can+you+take+the+next+move+at+https://github.com/mohamednaji7/Community-X-O-Game) | [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://github.com/mohamednaji7/Community-X-O-Game)
 
 ## Game Statistics
 
-- **Moves played**: 0
-- **Current player**: X
+- **Moves played**: 1
+- **Current player**: O
 - **Status**: In progress
 
 ---
