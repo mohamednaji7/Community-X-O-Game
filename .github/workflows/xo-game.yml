@@ -5,9 +5,13 @@ on:
   issues:
     types: [opened]
 
+permissions:
+  contents: write
+  issues: write
+
 jobs:
   process-move:
-    if: contains(github.event.issue.title, 'xo|move|')
+    if: contains(github.event.issue.title, 'xo|move|') || contains(github.event.issue.title, 'xo|new-game')
     runs-on: ubuntu-latest
     
     steps:
@@ -22,6 +26,7 @@ jobs:
           node-version: '18'
           
       - name: Process X-O Move
+        if: contains(github.event.issue.title, 'xo|move|')
         run: |
           # Parse the move from issue title
           MOVE_DATA=$(echo "${{ github.event.issue.title }}" | cut -d'|' -f3,4,5)
@@ -31,179 +36,11 @@ jobs:
           
           echo "Processing move: Row $ROW, Col $COL, Player $PLAYER"
           
-          # Create the Node.js script to process the move
-          cat > process_move.js << 'EOF'
-          const fs = require('fs');
-          
-          // Get move data from environment
-          const row = parseInt(process.env.ROW);
-          const col = parseInt(process.env.COL);
-          const player = process.env.PLAYER;
-          
-          // Load current game state
-          let gameState;
-          try {
-            gameState = JSON.parse(fs.readFileSync('game-state.json', 'utf8'));
-          } catch (error) {
-            // Initialize new game if file doesn't exist
-            gameState = {
-              board: [
-                ['', '', ''],
-                ['', '', ''],
-                ['', '', '']
-              ],
-              currentPlayer: 'X',
-              gameStatus: 'ongoing',
-              winner: null,
-              moveCount: 0
-            };
-          }
-          
-          // Validate move
-          if (gameState.gameStatus !== 'ongoing') {
-            console.log('Game is already finished!');
-            process.exit(1);
-          }
-          
-          if (gameState.currentPlayer !== player) {
-            console.log(`Wrong player! It's ${gameState.currentPlayer}'s turn`);
-            process.exit(1);
-          }
-          
-          if (gameState.board[row][col] !== '') {
-            console.log('Cell is already occupied!');
-            process.exit(1);
-          }
-          
-          // Make the move
-          gameState.board[row][col] = player;
-          gameState.moveCount++;
-          
-          // Check for winner
-          function checkWinner(board) {
-            // Check rows
-            for (let i = 0; i < 3; i++) {
-              if (board[i][0] && board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
-                return board[i][0];
-              }
-            }
-            
-            // Check columns
-            for (let j = 0; j < 3; j++) {
-              if (board[0][j] && board[0][j] === board[1][j] && board[1][j] === board[2][j]) {
-                return board[0][j];
-              }
-            }
-            
-            // Check diagonals
-            if (board[0][0] && board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
-              return board[0][0];
-            }
-            if (board[0][2] && board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
-              return board[0][2];
-            }
-            
-            return null;
-          }
-          
-          const winner = checkWinner(gameState.board);
-          if (winner) {
-            gameState.gameStatus = 'finished';
-            gameState.winner = winner;
-          } else if (gameState.moveCount === 9) {
-            gameState.gameStatus = 'finished';
-            gameState.winner = 'draw';
-          } else {
-            gameState.currentPlayer = player === 'X' ? 'O' : 'X';
-          }
-          
-          // Save updated game state
-          fs.writeFileSync('game-state.json', JSON.stringify(gameState, null, 2));
-          
-          // Generate README
-          function generateCell(row, col, value) {
-            if (value === 'X') {
-              return '❌';
-            } else if (value === 'O') {
-              return '⭕';
-            } else {
-              // Empty cell - create link for next move
-              const nextPlayer = gameState.currentPlayer;
-              const issueTitle = `xo|move|${row}|${col}|${nextPlayer}`;
-              const issueBody = "Just push 'Submit new issue'. You don't need to do anything else.";
-              const url = `https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}`;
-              return `[⬜](${url})`;
-            }
-          }
-          
-          let readme = `# Community X-O Game
-          
-          **Game is in progress!** This is open to ANYONE to play the next move. That's the point! 🎮
-          
-          `;
-          
-          if (gameState.gameStatus === 'ongoing') {
-            readme += `**${gameState.currentPlayer}'s turn!** Click on an empty cell to make your move.\n\n`;
-          } else if (gameState.winner === 'draw') {
-            readme += `**Game Over - It's a Draw!** 🤝\n\n`;
-          } else {
-            readme += `**Game Over - ${gameState.winner} Wins!** 🎉\n\n`;
-          }
-          
-          readme += `## Game Board\n\n`;
-          readme += `|   | A | B | C |\n`;
-          readme += `|---|---|---|---|\n`;
-          
-          for (let i = 0; i < 3; i++) {
-            readme += `| ${i + 1} |`;
-            for (let j = 0; j < 3; j++) {
-              readme += ` ${generateCell(i, j, gameState.board[i][j])} |`;
-            }
-            readme += `\n`;
-          }
-          
-          readme += `\n## How to Play\n\n`;
-          readme += `1. Click on any empty cell (⬜) to make your move\n`;
-          readme += `2. This will create a GitHub issue - just click "Submit new issue"\n`;
-          readme += `3. The game will automatically update with your move\n`;
-          readme += `4. Players alternate between X and O\n`;
-          readme += `5. First to get 3 in a row (horizontal, vertical, or diagonal) wins!\n\n`;
-          
-          if (gameState.gameStatus === 'finished') {
-            readme += `## Start New Game\n\n`;
-            readme += `Want to play again? [Click here to start a new game](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cnew-game&body=Just+push+%27Submit+new+issue%27+to+start+a+new+game.)\n\n`;
-          }
-          
-          readme += `## Share with Friends\n\n`;
-          readme += `[Share on Twitter](https://twitter.com/share?text=I'm+playing+X-O+on+a+GitHub+repository!+Can+you+take+the+next+move+at+https://github.com/mohamednaji7/Community-X-O-Game) | [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://github.com/mohamednaji7/Community-X-O-Game)\n\n`;
-          
-          readme += `## Game Statistics\n\n`;
-          readme += `- **Moves played**: ${gameState.moveCount}\n`;
-          readme += `- **Current player**: ${gameState.gameStatus === 'ongoing' ? gameState.currentPlayer : 'Game finished'}\n`;
-          readme += `- **Status**: ${gameState.gameStatus === 'ongoing' ? 'In progress' : 'Finished'}\n`;
-          
-          if (gameState.winner) {
-            readme += `- **Winner**: ${gameState.winner === 'draw' ? 'Draw' : gameState.winner}\n`;
-          }
-          
-          readme += `\n---\n\n`;
-          readme += `**How this works**: When you click a cell, it creates a GitHub Issue that triggers a GitHub Actions workflow. The workflow processes your move and updates this README with the new game state. Cool, right? 🤖\n\n`;
-          readme += `**Found a bug?** [Report it here](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=Bug+Report&body=Describe+the+issue+here...)\n`;
-          
-          fs.writeFileSync('README.md', readme);
-          
-          console.log('Move processed successfully!');
-          console.log(`Game state: ${gameState.gameStatus}`);
-          if (gameState.winner) {
-            console.log(`Winner: ${gameState.winner}`);
-          }
-          EOF
-          
           # Set environment variables and run the script
           export ROW="$ROW"
           export COL="$COL"
           export PLAYER="$PLAYER"
-          node process_move.js
+          node scripts/update-game.js
           
       - name: Handle New Game Request
         if: contains(github.event.issue.title, 'xo|new-game')
@@ -223,46 +60,7 @@ jobs:
           }
           EOF
           
-          # Generate fresh README
-          cat > README.md << 'EOF'
-          # Community X-O Game
-          
-          **New Game Started!** This is open to ANYONE to play the next move. That's the point! 🎮
-          
-          **X's turn!** Click on an empty cell to make your move.
-          
-          ## Game Board
-          
-          |   | A | B | C |
-          |---|---|---|---|
-          | 1 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C0%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C1%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C0%7C2%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) |
-          | 2 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C0%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C1%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C1%7C2%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) |
-          | 3 | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C0%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C1%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) | [⬜](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=xo%7Cmove%7C2%7C2%7CX&body=Just+push+%27Submit+new+issue%27.+You+don%27t+need+to+do+anything+else.) |
-          
-          ## How to Play
-          
-          1. Click on any empty cell (⬜) to make your move
-          2. This will create a GitHub issue - just click "Submit new issue"
-          3. The game will automatically update with your move
-          4. Players alternate between X and O
-          5. First to get 3 in a row (horizontal, vertical, or diagonal) wins!
-          
-          ## Share with Friends
-          
-          [Share on Twitter](https://twitter.com/share?text=I'm+playing+X-O+on+a+GitHub+repository!+Can+you+take+the+next+move+at+https://github.com/mohamednaji7/Community-X-O-Game) | [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://github.com/mohamednaji7/Community-X-O-Game)
-          
-          ## Game Statistics
-          
-          - **Moves played**: 0
-          - **Current player**: X
-          - **Status**: In progress
-          
-          ---
-          
-          **How this works**: When you click a cell, it creates a GitHub Issue that triggers a GitHub Actions workflow. The workflow processes your move and updates this README with the new game state. Cool, right? 🤖
-          
-          **Found a bug?** [Report it here](https://github.com/mohamednaji7/Community-X-O-Game/issues/new?title=Bug+Report&body=Describe+the+issue+here...)
-          EOF
+          node scripts/generate-readme.js
           
           echo "New game started successfully!"
           
