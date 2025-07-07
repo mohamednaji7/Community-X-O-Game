@@ -5,12 +5,7 @@
     ["", "", ""]
   ],
   "currentPlayer": "X",
-  "gameId": 1001,
+  "gameStatus": "ongoing",
   "winner": null,
-  "gameOver": false,
-  "lastMove": {
-    "player": "",
-    "position": "",
-    "timestamp": ""
-  }
+  "moveCount": 0
 }
